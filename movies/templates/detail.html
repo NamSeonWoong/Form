@@ -17,4 +17,17 @@
     <input type="submit" value="삭제(post)">
   </form>
   <a href="{% url 'movies:update' movie.id %}">수정</a>
+  <a href="{% url 'movies:update_model_form' movie.id %}">수정(모델폼)</a>
+  
+  <hr>
+
+  <form action="{% url 'movies:comment_create' movie.id %}" method="post">
+    {% csrf_token %}
+    {{comment_form.as_p}}
+    <input type="submit">
+  </form>
+  
+  {% for comment in movie.comment_set.all %}
+    <p>{{comment.content}}</p>
+  {% endfor %}
 {% endblock %}

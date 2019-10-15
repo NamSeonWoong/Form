@@ -12,3 +12,9 @@ class Movie(models.Model):
     score = models.FloatField()
     poster_url = models.TextField()
     description = models.TextField()
+
+class Comment(models.Model):
+    content = models.CharField(max_length=200)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    class Meta:
+        ordering = ('-id',)

@@ -1,5 +1,5 @@
 from django import forms
-
+from .models import Movie, Comment
 class MovieForm(forms.Form):
     title = forms.CharField(max_length=100)
     title_en = forms.CharField(
@@ -18,3 +18,14 @@ class MovieForm(forms.Form):
     score = forms.FloatField()
     poster_url = forms.CharField(widget=forms.Textarea)
     description = forms.CharField(widget=forms.Textarea)
+
+class MovieModelForm(forms.ModelForm):
+    open_date = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}))
+    class Meta:
+        model = Movie
+        fields = '__all__'
+
+class CommentModelForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('content',)
